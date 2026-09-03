@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <title>Tambah Buku</title>
+<link rel="stylesheet" href="../assets/css/style.css"></head>
+<body>
+    <h2>Tambah Buku Baru</h2>
+    <nav>
+        <a href="../index.html">Beranda</a> | 
+        <a href="list.html">Daftar Buku</a>
+    </nav>
+    <hr>
+
+    <form id="form-tambah">
+        <p>
+            <label for="judul">Judul</label><br>
+            <input type="text" id="judul" required>
+        </p>
+        <p>
+            <label for="pengarang">Pengarang</label><br>
+            <input type="text" id="pengarang" required>
+        </p>
+        <p>
+            <label for="tahun">Tahun Terbit</label><br>
+            <input type="number" id="tahun" min="1900" max="2026" required>
+        </p>
+        <p>
+            <label for="stok">Stok</label><br>
+            <input type="number" id="stok" min="0" required>
+        </p>
+        <p>
+            <button type="submit">Simpan</button>
+        </p>
+    </form>
+
+    <script>
+        document.getElementById('form-tambah').addEventListener('submit', function(e) {
+            e.preventDefault(); 
+            const bukuBaru = {
+                id: Date.now(), 
+                judul: document.getElementById('judul').value,
+                pengarang: document.getElementById('pengarang').value,
+                tahun: document.getElementById('tahun').value,
+                stok: document.getElementById('stok').value
+            };
+
+            let daftarBuku = JSON.parse(localStorage.getItem('dataBuku')) || [];
+            daftarBuku.push(bukuBaru);
+            localStorage.setItem('dataBuku', JSON.stringify(daftarBuku));
+
+            alert('Buku berhasil disimpan!');
+            window.location.href = 'list.html';
+        });
+    </script>
+</body>
+</html>
