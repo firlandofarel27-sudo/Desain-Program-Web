@@ -1,0 +1,1903 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="description"
+        content="TITIPIN - Aplikasi titip barang mahasiswa"
+    >
+
+    <title>TITIPIN - Sistem Barang Kampus</title>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+
+
+<!-- =====================================================
+     NAVBAR
+     ===================================================== -->
+
+<nav class="navbar">
+
+    <div class="navbar-container">
+
+        <a href="#home" class="logo">
+
+            <div class="logo-icon">
+                📦
+            </div>
+
+            TITIPIN
+
+        </a>
+
+
+        <div class="nav-menu">
+
+            <a href="#home" class="active">
+                Home
+            </a>
+
+            <a href="#report">
+                Lapor
+            </a>
+
+            <a href="#profile">
+                Profile
+            </a>
+
+            <a href="#admin">
+                Admin
+            </a>
+
+        </div>
+
+    </div>
+
+</nav>
+
+
+
+<!-- =====================================================
+     LOGIN / REGISTER
+     ===================================================== -->
+
+<section id="login" class="auth-page">
+
+    <div class="auth-container">
+
+        <div class="auth-logo">
+
+            <h1>📦 TITIPIN</h1>
+
+            <p>
+                Sistem barang hilang dan ditemukan
+                untuk mahasiswa
+            </p>
+
+        </div>
+
+
+        <!-- TAB -->
+
+        <div class="auth-tabs">
+
+            <button
+                class="auth-tab active"
+                onclick="showLogin()"
+            >
+                Login
+            </button>
+
+            <button
+                class="auth-tab"
+                onclick="showRegister()"
+            >
+                Register
+            </button>
+
+        </div>
+
+
+        <!-- LOGIN FORM -->
+
+        <div id="loginForm">
+
+            <div class="form-group">
+
+                <label>
+                    Email / NIM
+                </label>
+
+                <input
+                    type="text"
+                    class="form-control"
+                    placeholder="Masukkan email atau NIM"
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+                    Password
+                </label>
+
+                <input
+                    type="password"
+                    class="form-control"
+                    placeholder="Masukkan password"
+                >
+
+            </div>
+
+
+            <button
+                class="btn btn-primary btn-full"
+                onclick="loginUser()"
+            >
+                Login
+            </button>
+
+
+            <div class="divider">
+                atau
+            </div>
+
+
+            <button class="sso-btn">
+                🎓 Login dengan Campus SSO
+            </button>
+
+        </div>
+
+
+        <!-- REGISTER FORM -->
+
+        <div
+            id="registerForm"
+            style="display: none;"
+        >
+
+            <div class="form-row">
+
+                <div class="form-group">
+
+                    <label>
+                        Nama
+                    </label>
+
+                    <input
+                        type="text"
+                        class="form-control"
+                        placeholder="Nama lengkap"
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>
+                        NIM
+                    </label>
+
+                    <input
+                        type="text"
+                        class="form-control"
+                        placeholder="NIM"
+                    >
+
+                </div>
+
+            </div>
+
+
+            <div class="form-row">
+
+                <div class="form-group">
+
+                    <label>
+                        Jurusan
+                    </label>
+
+                    <input
+                        type="text"
+                        class="form-control"
+                        placeholder="Jurusan"
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>
+                        Kelas
+                    </label>
+
+                    <input
+                        type="text"
+                        class="form-control"
+                        placeholder="Kelas"
+                    >
+
+                </div>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+                    Nomor HP
+                </label>
+
+                <input
+                    type="tel"
+                    class="form-control"
+                    placeholder="08xxxxxxxxxx"
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+                    Email
+                </label>
+
+                <input
+                    type="email"
+                    class="form-control"
+                    placeholder="email@kampus.ac.id"
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+                    Password
+                </label>
+
+                <input
+                    type="password"
+                    class="form-control"
+                    placeholder="Buat password"
+                >
+
+            </div>
+
+
+            <button
+                class="btn btn-primary btn-full"
+                onclick="registerUser()"
+            >
+                Buat Akun
+            </button>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     HOME CATALOG
+     ===================================================== -->
+
+<section id="home" class="page">
+
+    <div class="container">
+
+
+        <div class="page-header">
+
+            <h1>
+                Temukan Barangmu 🔎
+            </h1>
+
+            <p>
+                Cari barang hilang atau barang yang
+                ditemukan di lingkungan kampus.
+            </p>
+
+        </div>
+
+
+        <!-- SEARCH -->
+
+        <div class="search-box">
+
+            <span class="search-icon">
+                🔎
+            </span>
+
+            <input
+                type="text"
+                placeholder="Cari nama barang..."
+                id="searchInput"
+                onkeyup="searchItems()"
+            >
+
+        </div>
+
+
+        <!-- FILTER -->
+
+        <div class="filter-chips">
+
+            <button
+                class="filter-chip active"
+                onclick="filterItems('all', this)"
+            >
+                Semua
+            </button>
+
+            <button
+                class="filter-chip"
+                onclick="filterItems('lost', this)"
+            >
+                Barang Hilang
+            </button>
+
+            <button
+                class="filter-chip"
+                onclick="filterItems('found', this)"
+            >
+                Barang Ditemukan
+            </button>
+
+            <button
+                class="filter-chip"
+                onclick="filterItems('electronic', this)"
+            >
+                Elektronik
+            </button>
+
+            <button
+                class="filter-chip"
+                onclick="filterItems('other', this)"
+            >
+                Lainnya
+            </button>
+
+        </div>
+
+
+        <!-- SUMMARY -->
+
+        <div class="summary-strip">
+
+            <div class="summary-card">
+
+                <span>
+                    Total Laporan
+                </span>
+
+                <strong>
+                    128
+                </strong>
+
+            </div>
+
+
+            <div class="summary-card">
+
+                <span>
+                    Barang Ditemukan
+                </span>
+
+                <strong>
+                    76
+                </strong>
+
+            </div>
+
+
+            <div class="summary-card">
+
+                <span>
+                    Berhasil Dikembalikan
+                </span>
+
+                <strong>
+                    54
+                </strong>
+
+            </div>
+
+        </div>
+
+
+        <!-- ITEM GRID -->
+
+        <div class="item-grid" id="itemGrid">
+
+
+            <!-- ITEM 1 -->
+
+            <div
+                class="item-card"
+                data-category="lost electronic"
+            >
+
+                <img
+                    class="item-image"
+                    src="https://images.unsplash.com/photo-1496181133206-80ce9b88a853?auto=format&fit=crop&w=800&q=80"
+                    alt="Laptop"
+                >
+
+                <div class="item-content">
+
+                    <h3 class="item-title">
+                        Laptop ASUS
+                    </h3>
+
+                    <p class="item-description">
+                        Ditemukan di Lab Komputer 2.
+                    </p>
+
+                    <div class="item-meta">
+
+                        <span class="badge badge-success">
+                            Ditemukan
+                        </span>
+
+                        <button
+                            class="btn btn-primary"
+                            onclick="showDetail('Laptop ASUS')"
+                        >
+                            Detail
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- ITEM 2 -->
+
+            <div
+                class="item-card"
+                data-category="lost electronic"
+            >
+
+                <img
+                    class="item-image"
+                    src="https://images.unsplash.com/photo-1609592424983-2bfcab7e6b19?auto=format&fit=crop&w=800&q=80"
+                    alt="Handphone"
+                >
+
+                <div class="item-content">
+
+                    <h3 class="item-title">
+                        iPhone 13
+                    </h3>
+
+                    <p class="item-description">
+                        Hilang di sekitar Gedung A.
+                    </p>
+
+                    <div class="item-meta">
+
+                        <span class="badge badge-danger">
+                            Hilang
+                        </span>
+
+                        <button
+                            class="btn btn-primary"
+                            onclick="showDetail('iPhone 13')"
+                        >
+                            Detail
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- ITEM 3 -->
+
+            <div
+                class="item-card"
+                data-category="found other"
+            >
+
+                <img
+                    class="item-image"
+                    src="https://images.unsplash.com/photo-1584917865442-de89df76afd3?auto=format&fit=crop&w=800&q=80"
+                    alt="Tas"
+                >
+
+                <div class="item-content">
+
+                    <h3 class="item-title">
+                        Tas Hitam
+                    </h3>
+
+                    <p class="item-description">
+                        Ditemukan di area perpustakaan.
+                    </p>
+
+                    <div class="item-meta">
+
+                        <span class="badge badge-success">
+                            Ditemukan
+                        </span>
+
+                        <button
+                            class="btn btn-primary"
+                            onclick="showDetail('Tas Hitam')"
+                        >
+                            Detail
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- ITEM 4 -->
+
+            <div
+                class="item-card"
+                data-category="lost other"
+            >
+
+                <img
+                    class="item-image"
+                    src="https://images.unsplash.com/photo-1627123424574-724758594e93?auto=format&fit=crop&w=800&q=80"
+                    alt="Dompet"
+                >
+
+                <div class="item-content">
+
+                    <h3 class="item-title">
+                        Dompet Kulit
+                    </h3>
+
+                    <p class="item-description">
+                        Hilang setelah praktikum.
+                    </p>
+
+                    <div class="item-meta">
+
+                        <span class="badge badge-danger">
+                            Hilang
+                        </span>
+
+                        <button
+                            class="btn btn-primary"
+                            onclick="showDetail('Dompet Kulit')"
+                        >
+                            Detail
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     REPORT FORM
+     ===================================================== -->
+
+<section id="report" class="page">
+
+    <div class="container">
+
+        <div class="page-header">
+
+            <h1>
+                Buat Laporan
+            </h1>
+
+            <p>
+                Laporkan barang hilang, ditemukan,
+                atau kerusakan fasilitas.
+            </p>
+
+        </div>
+
+
+        <div class="card report-container">
+
+
+            <!-- MODE -->
+
+            <div class="mode-toggle">
+
+                <button class="active">
+                    Barang Hilang
+                </button>
+
+                <button>
+                    Barang Ditemukan
+                </button>
+
+                <button>
+                    Kerusakan Fasilitas
+                </button>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+                    Nama Barang
+                </label>
+
+                <input
+                    type="text"
+                    class="form-control"
+                    placeholder="Contoh: Laptop ASUS"
+                >
+
+            </div>
+
+
+            <div class="form-row">
+
+                <div class="form-group">
+
+                    <label>
+                        Lokasi
+                    </label>
+
+                    <input
+                        type="text"
+                        class="form-control"
+                        placeholder="Lokasi kejadian"
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>
+                        Tanggal
+                    </label>
+
+                    <input
+                        type="date"
+                        class="form-control"
+                    >
+
+                </div>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+                    Deskripsi
+                </label>
+
+                <textarea
+                    class="form-control"
+                    placeholder="Jelaskan ciri-ciri barang..."
+                ></textarea>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+                    Foto Barang
+                </label>
+
+                <label class="upload-box">
+
+                    📷
+                    <br>
+
+                    Klik untuk upload foto
+
+                    <input
+                        type="file"
+                        accept="image/*"
+                    >
+
+                </label>
+
+            </div>
+
+
+            <div class="checkbox-group">
+
+                <input
+                    type="checkbox"
+                    id="confirmation"
+                >
+
+                <label for="confirmation">
+
+                    Saya memastikan informasi yang
+                    saya masukkan adalah benar.
+
+                </label>
+
+            </div>
+
+
+            <button
+                class="btn btn-primary btn-full"
+                onclick="submitReport()"
+            >
+                Kirim Laporan
+            </button>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     ITEM DETAIL
+     ===================================================== -->
+
+<section id="detail" class="page">
+
+    <div class="container">
+
+        <div class="detail-grid">
+
+
+            <div>
+
+                <img
+                    id="detailImage"
+                    class="detail-image"
+                    src="https://images.unsplash.com/photo-1496181133206-80ce9b88a853?auto=format&fit=crop&w=1000&q=80"
+                    alt="Detail barang"
+                >
+
+            </div>
+
+
+            <div class="detail-info">
+
+                <span class="badge badge-success">
+                    Ditemukan
+                </span>
+
+                <h1 id="detailTitle">
+                    Laptop ASUS
+                </h1>
+
+                <p class="detail-description">
+
+                    Laptop ditemukan di Lab Komputer 2.
+                    Pemilik dapat melakukan klaim
+                    dengan membawa bukti kepemilikan.
+
+                </p>
+
+
+                <div class="metadata">
+
+                    <div class="metadata-row">
+
+                        <span>
+                            Lokasi
+                        </span>
+
+                        <span>
+                            Lab Komputer 2
+                        </span>
+
+                    </div>
+
+
+                    <div class="metadata-row">
+
+                        <span>
+                            Tanggal
+                        </span>
+
+                        <span>
+                            20 September 2026
+                        </span>
+
+                    </div>
+
+
+                    <div class="metadata-row">
+
+                        <span>
+                            Kategori
+                        </span>
+
+                        <span>
+                            Elektronik
+                        </span>
+
+                    </div>
+
+
+                    <div class="metadata-row">
+
+                        <span>
+                            Status
+                        </span>
+
+                        <span>
+                            Ditemukan
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <!-- CLAIM TICKET -->
+
+                <div class="claim-ticket">
+
+                    <h3>
+                        🎫 Claim Ticket
+                    </h3>
+
+                    <p>
+                        Gunakan kode berikut saat
+                        melakukan pengambilan barang.
+                    </p>
+
+                    <div class="claim-code">
+                        A7K3FP
+                    </div>
+
+                    <div class="qr-code">
+                        QR CODE
+                    </div>
+
+                </div>
+
+
+                <br>
+
+                <button
+                    class="btn btn-primary btn-full"
+                    onclick="showVerification()"
+                >
+                    Ajukan Klaim
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     STAFF VERIFICATION
+     ===================================================== -->
+
+<section id="verification" class="page">
+
+    <div class="container">
+
+        <div class="verification-header">
+
+            <h1>
+                Verifikasi Pengambilan
+            </h1>
+
+            <p>
+                Staff memasukkan kode klaim
+                untuk memverifikasi pemilik barang.
+            </p>
+
+
+            <div class="code-input">
+
+                <input
+                    type="text"
+                    maxlength="6"
+                    placeholder="A7K3FP"
+                >
+
+                <button class="btn btn-primary">
+                    Periksa
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <div class="card">
+
+            <h2 class="card-title">
+                Data Pemilik
+            </h2>
+
+
+            <div class="claimant-card">
+
+                <img
+                    class="claimant-photo"
+                    src="https://i.pravatar.cc/150?img=12"
+                    alt="Mahasiswa"
+                >
+
+                <div>
+
+                    <h3>
+                        Nadia Putri
+                    </h3>
+
+                    <p class="text-muted">
+                        NIM: 2341760001
+                    </p>
+
+                    <p class="text-muted">
+                        Teknik Informatika
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <br>
+
+
+            <div class="form-group">
+
+                <label>
+                    Bukti Serah Terima
+                </label>
+
+                <label class="upload-box">
+
+                    📷
+                    <br>
+
+                    Upload foto serah terima
+
+                    <input
+                        type="file"
+                        accept="image/*"
+                    >
+
+                </label>
+
+            </div>
+
+
+            <button class="btn btn-success btn-full">
+                ✓ Konfirmasi Pengambilan
+            </button>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     PROFILE
+     ===================================================== -->
+
+<section id="profile" class="page">
+
+    <div class="container">
+
+
+        <div class="profile-header">
+
+            <div class="profile-main">
+
+                <img
+                    class="profile-avatar"
+                    src="https://i.pravatar.cc/150?img=12"
+                    alt="Profile"
+                >
+
+                <div>
+
+                    <div class="profile-name">
+                        Nadia Putri
+                    </div>
+
+                    <div class="profile-email">
+                        nadia@kampus.ac.id
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="profile-stats">
+
+                <div class="profile-stat">
+
+                    <strong>
+                        12
+                    </strong>
+
+                    <span>
+                        Laporan
+                    </span>
+
+                </div>
+
+
+                <div class="profile-stat">
+
+                    <strong>
+                        8
+                    </strong>
+
+                    <span>
+                        Ditemukan
+                    </span>
+
+                </div>
+
+
+                <div class="profile-stat">
+
+                    <strong>
+                        6
+                    </strong>
+
+                    <span>
+                        Dikembalikan
+                    </span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="card">
+
+            <h2 class="card-title">
+                Riwayat Laporan
+            </h2>
+
+
+            <div class="history-list">
+
+
+                <div class="history-item">
+
+                    <div class="history-info">
+
+                        <h4>
+                            Laptop ASUS
+                        </h4>
+
+                        <p>
+                            20 September 2026
+                        </p>
+
+                    </div>
+
+                    <span class="badge badge-success">
+                        Selesai
+                    </span>
+
+                </div>
+
+
+                <div class="history-item">
+
+                    <div class="history-info">
+
+                        <h4>
+                            Dompet Kulit
+                        </h4>
+
+                        <p>
+                            18 September 2026
+                        </p>
+
+                    </div>
+
+                    <span class="badge badge-warning">
+                        Diproses
+                    </span>
+
+                </div>
+
+
+                <div class="history-item">
+
+                    <div class="history-info">
+
+                        <h4>
+                            Kartu Mahasiswa
+                        </h4>
+
+                        <p>
+                            12 September 2026
+                        </p>
+
+                    </div>
+
+                    <span class="badge badge-success">
+                        Selesai
+                    </span>
+
+                </div>
+
+
+            </div>
+
+
+            <br>
+
+            <button
+                class="btn btn-danger"
+                onclick="logout()"
+            >
+                Logout
+            </button>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     ADMIN DASHBOARD
+     ===================================================== -->
+
+<section id="admin" class="page">
+
+    <div class="container">
+
+
+        <div class="admin-header">
+
+            <h1>
+                Admin Dashboard
+            </h1>
+
+            <p>
+                Monitoring aktivitas TITIPIN
+            </p>
+
+        </div>
+
+
+        <!-- STAT -->
+
+        <div class="stat-grid">
+
+
+            <div class="stat-card">
+
+                <span>
+                    Total User
+                </span>
+
+                <strong>
+                    1,284
+                </strong>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <span>
+                    Total Laporan
+                </span>
+
+                <strong>
+                    628
+                </strong>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <span>
+                    Barang Ditemukan
+                </span>
+
+                <strong>
+                    384
+                </strong>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <span>
+                    Dikembalikan
+                </span>
+
+                <strong>
+                    276
+                </strong>
+
+            </div>
+
+        </div>
+
+
+        <!-- QUICK ACTION -->
+
+        <div class="quick-actions">
+
+
+            <div class="quick-action">
+
+                <div class="quick-action-icon">
+                    📦
+                </div>
+
+                <h3>
+                    Kelola Barang
+                </h3>
+
+                <p class="text-muted">
+                    Kelola laporan barang
+                </p>
+
+            </div>
+
+
+            <div class="quick-action">
+
+                <div class="quick-action-icon">
+                    👥
+                </div>
+
+                <h3>
+                    Kelola User
+                </h3>
+
+                <p class="text-muted">
+                    Data pengguna
+                </p>
+
+            </div>
+
+
+            <div
+                class="quick-action"
+                onclick="showAnalytics()"
+            >
+
+                <div class="quick-action-icon">
+                    📊
+                </div>
+
+                <h3>
+                    Analytics
+                </h3>
+
+                <p class="text-muted">
+                    Lihat statistik
+                </p>
+
+            </div>
+
+
+        </div>
+
+
+        <!-- NEEDS ACTION -->
+
+        <div class="card">
+
+            <h2 class="card-title">
+                Perlu Ditindaklanjuti
+            </h2>
+
+
+            <div class="needs-action">
+
+
+                <div class="action-item">
+
+                    <div>
+
+                        <strong>
+                            Laptop ASUS
+                        </strong>
+
+                        <p class="text-muted">
+                            Menunggu verifikasi
+                        </p>
+
+                    </div>
+
+                    <button class="btn btn-warning">
+                        Check
+                    </button>
+
+                </div>
+
+
+                <div class="action-item">
+
+                    <div>
+
+                        <strong>
+                            Dompet Hitam
+                        </strong>
+
+                        <p class="text-muted">
+                            Klaim baru
+                        </p>
+
+                    </div>
+
+                    <button class="btn btn-warning">
+                        Check
+                    </button>
+
+                </div>
+
+
+                <div class="action-item">
+
+                    <div>
+
+                        <strong>
+                            Kerusakan Kursi
+                        </strong>
+
+                        <p class="text-muted">
+                            Laporan fasilitas
+                        </p>
+
+                    </div>
+
+                    <button class="btn btn-warning">
+                        Check
+                    </button>
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     ANALYTICS
+     ===================================================== -->
+
+<section id="analytics" class="page">
+
+    <div class="container">
+
+
+        <div class="page-header">
+
+            <h1>
+                Analytics
+            </h1>
+
+            <p>
+                Statistik aktivitas TITIPIN
+            </p>
+
+        </div>
+
+
+        <!-- PERIOD -->
+
+        <div class="form-group">
+
+            <select class="form-control">
+
+                <option>
+                    7 Hari Terakhir
+                </option>
+
+                <option>
+                    30 Hari Terakhir
+                </option>
+
+                <option>
+                    3 Bulan Terakhir
+                </option>
+
+                <option>
+                    1 Tahun Terakhir
+                </option>
+
+            </select>
+
+        </div>
+
+
+        <!-- KPI -->
+
+        <div class="analytics-grid">
+
+
+            <div class="kpi-card">
+
+                <span class="text-muted">
+                    Tingkat Pengembalian
+                </span>
+
+                <div class="kpi-value">
+                    82%
+                </div>
+
+                <div class="progress">
+
+                    <div
+                        class="progress-bar"
+                        style="width: 82%;"
+                    ></div>
+
+                </div>
+
+            </div>
+
+
+            <div class="kpi-card">
+
+                <span class="text-muted">
+                    Penyelesaian Laporan
+                </span>
+
+                <div class="kpi-value">
+                    76%
+                </div>
+
+                <div class="progress">
+
+                    <div
+                        class="progress-bar"
+                        style="width: 76%;"
+                    ></div>
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+
+        <!-- CHART -->
+
+        <div class="chart-card">
+
+            <h2 class="card-title">
+                Laporan Berdasarkan Kategori
+            </h2>
+
+
+            <div class="chart">
+
+
+                <div class="chart-row">
+
+                    <span class="chart-label">
+                        Elektronik
+                    </span>
+
+                    <div class="chart-track">
+
+                        <div
+                            class="chart-bar"
+                            style="width: 85%;"
+                        ></div>
+
+                    </div>
+
+                    <span class="chart-value">
+                        85
+                    </span>
+
+                </div>
+
+
+                <div class="chart-row">
+
+                    <span class="chart-label">
+                        Dompet
+                    </span>
+
+                    <div class="chart-track">
+
+                        <div
+                            class="chart-bar"
+                            style="width: 65%;"
+                        ></div>
+
+                    </div>
+
+                    <span class="chart-value">
+                        65
+                    </span>
+
+                </div>
+
+
+                <div class="chart-row">
+
+                    <span class="chart-label">
+                        Tas
+                    </span>
+
+                    <div class="chart-track">
+
+                        <div
+                            class="chart-bar"
+                            style="width: 52%;"
+                        ></div>
+
+                    </div>
+
+                    <span class="chart-value">
+                        52
+                    </span>
+
+                </div>
+
+
+                <div class="chart-row">
+
+                    <span class="chart-label">
+                        Kartu
+                    </span>
+
+                    <div class="chart-track">
+
+                        <div
+                            class="chart-bar"
+                            style="width: 40%;"
+                        ></div>
+
+                    </div>
+
+                    <span class="chart-value">
+                        40
+                    </span>
+
+                </div>
+
+
+                <div class="chart-row">
+
+                    <span class="chart-label">
+                        Lainnya
+                    </span>
+
+                    <div class="chart-track">
+
+                        <div
+                            class="chart-bar"
+                            style="width: 30%;"
+                        ></div>
+
+                    </div>
+
+                    <span class="chart-value">
+                        30
+                    </span>
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     FOOTER
+     ===================================================== -->
+
+<footer class="footer">
+
+    <p>
+        © 2026 TITIPIN
+    </p>
+
+    <p>
+        Aplikasi titip barang mahasiswa -
+        Lebih mudah, lebih rapi, lebih aman.
+    </p>
+
+</footer>
+
+
+
+<!-- =====================================================
+     JAVASCRIPT SEDERHANA
+     ===================================================== -->
+
+<script>
+
+    /* =========================
+       LOGIN / REGISTER
+       ========================= */
+
+    function showLogin() {
+
+        document.getElementById("loginForm").style.display = "block";
+
+        document.getElementById("registerForm").style.display = "none";
+
+        const tabs = document.querySelectorAll(".auth-tab");
+
+        tabs[0].classList.add("active");
+        tabs[1].classList.remove("active");
+    }
+
+
+    function showRegister() {
+
+        document.getElementById("loginForm").style.display = "none";
+
+        document.getElementById("registerForm").style.display = "block";
+
+        const tabs = document.querySelectorAll(".auth-tab");
+
+        tabs[0].classList.remove("active");
+        tabs[1].classList.add("active");
+    }
+
+
+    function loginUser() {
+
+        alert("Login berhasil!");
+
+        document.getElementById("home")
+            .scrollIntoView({
+                behavior: "smooth"
+            });
+    }
+
+
+    function registerUser() {
+
+        alert("Registrasi berhasil!");
+
+        showLogin();
+    }
+
+
+    /* =========================
+       LOGOUT
+       ========================= */
+
+    function logout() {
+
+        alert("Anda telah logout.");
+
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth"
+        });
+    }
+
+
+    /* =========================
+       SEARCH
+       ========================= */
+
+    function searchItems() {
+
+        const input =
+            document
+                .getElementById("searchInput")
+                .value
+                .toLowerCase();
+
+        const items =
+            document.querySelectorAll(".item-card");
+
+        items.forEach(function(item) {
+
+            const title =
+                item
+                    .querySelector(".item-title")
+                    .textContent
+                    .toLowerCase();
+
+            if (title.includes(input)) {
+
+                item.style.display = "";
+
+            } else {
+
+                item.style.display = "none";
+
+            }
+
+        });
+
+    }
+
+
+    /* =========================
+       FILTER
+       ========================= */
+
+    function filterItems(category, button) {
+
+        const items =
+            document.querySelectorAll(".item-card");
+
+        const buttons =
+            document.querySelectorAll(".filter-chip");
+
+        buttons.forEach(function(btn) {
+
+            btn.classList.remove("active");
+
+        });
+
+        button.classList.add("active");
+
+
+        items.forEach(function(item) {
+
+            const itemCategory =
+                item.dataset.category || "";
+
+            if (
+                category === "all" ||
+                itemCategory.includes(category)
+            ) {
+
+                item.style.display = "";
+
+            } else {
+
+                item.style.display = "none";
+
+            }
+
+        });
+
+    }
+
+
+    /* =========================
+       DETAIL
+       ========================= */
+
+    function showDetail(itemName) {
+
+        document.getElementById("detailTitle")
+            .textContent = itemName;
+
+        document.getElementById("detail")
+            .scrollIntoView({
+                behavior: "smooth"
+            });
+
+    }
+
+
+    /* =========================
+       VERIFICATION
+       ========================= */
+
+    function showVerification() {
+
+        document.getElementById("verification")
+            .scrollIntoView({
+                behavior: "smooth"
+            });
+
+    }
+
+
+    /* =========================
+       ANALYTICS
+       ========================= */
+
+    function showAnalytics() {
+
+        document.getElementById("analytics")
+            .scrollIntoView({
+                behavior: "smooth"
+            });
+
+    }
+
+
+    /* =========================
+       REPORT
+       ========================= */
+
+    function submitReport() {
+
+        const confirmation =
+            document.getElementById("confirmation");
+
+        if (!confirmation.checked) {
+
+            alert(
+                "Silakan centang konfirmasi terlebih dahulu."
+            );
+
+            return;
+
+        }
+
+        alert(
+            "Laporan berhasil dikirim!"
+        );
+
+    }
+
+</script>
+
+
+</body>
+</html>
