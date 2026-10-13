@@ -1,0 +1,89 @@
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TITIPIN — Campus Care</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="login-page">
+  <main class="login-wrap">
+    <section class="brand-panel">
+      <div class="brand">
+        <span class="brand-mark">⌕</span>
+        <div><b>TITIPIN</b><small>Campus Care</small></div>
+      </div>
+      <div class="brand-copy">
+        <p class="eyebrow">KAMPUS LEBIH PEDULI</p>
+        <h1>Ada barang<br>yang hilang?</h1>
+        <p>Barang kembali. Kampus terjaga.</p>
+        <div class="decor-circles"><i></i><i></i><i></i></div>
+      </div>
+      <small class="copyright">© 2026 TITIPIN Campus Care</small>
+    </section>
+
+    <section class="login-panel">
+      <div class="login-card">
+        <div class="mobile-brand brand">
+          <span class="brand-mark">⌕</span>
+          <div><b>TITIPIN</b><small>Campus Care</small></div>
+        </div>
+
+        <p class="eyebrow">SELAMAT DATANG</p>
+        <h2>Masuk ke akun Anda</h2>
+        <p class="muted">Gunakan akun kampus untuk melanjutkan.</p>
+
+        <form id="loginForm">
+          <label for="email">Email kampus</label>
+          <input type="email" id="email"
+            placeholder="nama@kampus.ac.id" required>
+
+          <label for="password">Kata sandi</label>
+          <div class="password">
+            <input type="password" id="password"
+              placeholder="Masukkan kata sandi" required>
+            <button type="button" class="show-pass" id="togglePass">
+              Lihat
+            </button>
+          </div>
+
+          <div class="form-row">
+            <label class="check">
+              <input type="checkbox"> Ingat saya
+            </label>
+            <a href="#" onclick="alert('Silakan hubungi administrator kampus untuk reset kata sandi.')">
+              Lupa kata sandi?
+            </a>
+          </div>
+
+          <button class="btn primary full" type="submit">
+            Masuk <span>→</span>
+          </button>
+
+          <div class="or"><span>atau</span></div>
+
+          <button type="button" class="btn outline full" id="sso">
+            Masuk dengan SSO Kampus
+          </button>
+        </form>
+
+        <div class="demo-login">
+          <b>Demo tampilan</b>
+          <p>Pilih peran untuk mencoba setiap dashboard. Tidak memerlukan backend.</p>
+          <div class="role-picks">
+            <a href="user.html">User</a>
+            <a href="admin.html">Admin</a>
+            <a href="super-admin.html">Super Admin</a>
+          </div>
+        </div>
+
+        <p class="tiny muted center">
+          Dengan masuk, Anda menyetujui ketentuan layanan TITIPIN.
+        </p>
+      </div>
+    </section>
+  </main>
+  <script src="app.js"></script>
+</body>
+</html>
