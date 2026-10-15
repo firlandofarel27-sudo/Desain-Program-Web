@@ -1,22 +1,29 @@
--- Jobsheet 8: skema awal database simpus_mini (PostgreSQL)
--- Jalankan setelah membuat database, misal:
---   createdb simpus_mini
---   psql -d simpus_mini -f sql/01_buku_anggota.sql
+<?php
+$page_title = "Beranda";
+include __DIR__ . '/includes/header.php';
+require __DIR__ . '/includes/koneksi.php';
 
-CREATE TABLE IF NOT EXISTS buku (
-    id SERIAL PRIMARY KEY,
-    judul VARCHAR(255) NOT NULL,
-    pengarang VARCHAR(255) NOT NULL,
-    tahun INTEGER NOT NULL,
-    isbn VARCHAR(50),
-    stok INTEGER NOT NULL DEFAULT 0,
-    kategori VARCHAR(50)
-);
+$totalBuku = $pdo->query("SELECT COUNT(*) FROM buku")->fetchColumn();
+$totalAnggota = $pdo->query("SELECT COUNT(*) FROM anggota")->fetchColumn();
+?>
+        <section>
+            <h2>Selamat Datang di Sistem Perpustakaan Mini</h2>
+            <p>Aplikasi sederhana untuk mengelola data buku dan anggota perpustakaan.</p>
+        </section>
 
-CREATE TABLE IF NOT EXISTS anggota (
-    id SERIAL PRIMARY KEY,
-    nama VARCHAR(255) NOT NULL,
-    no_anggota VARCHAR(50) NOT NULL UNIQUE,
-    alamat VARCHAR(255),
-    no_hp VARCHAR(30)
-);
+        <section>
+            <h2>Ringkasan</h2>
+            <article>
+                <h3>Total Buku</h3>
+                <p><?php echo $totalBuku; ?></p>
+            </article>
+            <article>
+                <h3>Total Anggota</h3>
+                <p><?php echo $totalAnggota; ?></p>
+            </article>
+            <article>
+                <h3>Sedang Dipinjam</h3>
+                <p>0</p>
+            </article>
+        </section>
+<?php include __DIR__ . '/includes/footer.php'; ?>
