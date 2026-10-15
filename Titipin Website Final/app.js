@@ -329,7 +329,6 @@ function itemCard(i) {
   `;
 }
 
-/* DASHBOARD ADMIN */
 
 function homeAdmin() {
   return `
@@ -373,7 +372,6 @@ function homeAdmin() {
   `;
 }
 
-/* DASHBOARD SUPER ADMIN */
 
 function homeSuper() {
   return `
@@ -432,7 +430,6 @@ function homeSuper() {
   `;
 }
 
-/* HALAMAN LAPORAN */
 
 function reportsPage(role) {
   return `
@@ -501,19 +498,6 @@ function reportForm() {
         </div>
 
         <div class="field">
-          <label>Lokasi kejadian *</label>
-          <select required>
-            <option value="">Pilih lokasi</option>
-            <option>Perpustakaan</option>
-            <option>Gedung A</option>
-            <option>Gedung B</option>
-            <option>Kantin</option>
-            <option>Parkiran Timur</option>
-            <option>Laboratorium</option>
-          </select>
-        </div>
-
-        <div class="field">
           <label>Tanggal kejadian *</label>
           <input type="date" required value="2026-10-13">
         </div>
@@ -553,7 +537,6 @@ function reportForm() {
   `;
 }
 
-/* KATALOG BARANG */
 
 function catalogPage() {
   return `
@@ -574,13 +557,6 @@ function catalogPage() {
         <option>Kerusakan fasilitas</option>
       </select>
 
-      <select class="select" id="locationFilter">
-        <option value="">Semua lokasi</option>
-        <option>Perpustakaan</option>
-        <option>Gedung</option>
-        <option>Kantin</option>
-        <option>Parkiran</option>
-      </select>
     </div>
 
     <div class="item-grid" id="catalogGrid">
@@ -589,7 +565,6 @@ function catalogPage() {
   `;
 }
 
-/* VERIFIKASI KLAIM */
 
 function verifyPage() {
   return `
@@ -711,7 +686,6 @@ function analyticsPage(role) {
   `;
 }
 
-/* PROFIL */
 
 function profilePage(role) {
   const info = roleInfo(role);
@@ -829,7 +803,6 @@ function usersPage() {
   `;
 }
 
-/* PENGATURAN */
 
 function settingsPage() {
   return `
